@@ -13,6 +13,14 @@ const DAYS = ["日", "月", "火", "水", "木", "金", "土"]
 const MONTHS = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
 
 export default function Home() {
+
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+
   const today = new Date()
   const localToday = new Date(
   today.getFullYear(),
@@ -109,6 +117,8 @@ export default function Home() {
 
   const days = getDaysInMonth(currentMonth)
 
+  if (!mounted) return null
+
   return (
     <main className="min-h-screen bg-slate-50 p-4 pb-8 max-w-md mx-auto">
       <header className="pt-2 pb-4">
@@ -177,7 +187,7 @@ export default function Home() {
 
               return (
                 <button
-                  key={date.toISOString()}
+                  key={date.getTime()}
                   onClick={() => setSelectedDate(date)}
                   className={`aspect-square flex flex-col items-center justify-center rounded-xl text-sm font-medium transition-all relative
                     ${isSelected(date) ? "bg-blue-500 text-white" : "hover:bg-slate-100"}
