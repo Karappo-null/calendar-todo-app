@@ -53,7 +53,9 @@ export default function Home() {
     const startingDay = firstDay.getDay()
     const days: (Date | null)[] = []
     for (let i = 0; i < startingDay; i++) days.push(null)
-    for (let i = 1; i <= daysInMonth; i++) days.push(new Date(year, month, i))
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(new Date(year, month, i, 12)) // ← 昼12時にする
+    }
     return days
   }
 
