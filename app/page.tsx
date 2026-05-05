@@ -92,8 +92,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 p-4 pb-8 max-w-md mx-auto">
       <header className="pt-2 pb-4">
-        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Planly</h1>
-        <p className="text-sm text-slate-500">あなたの予定を管理</p>
+        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Calendar-Todo</h1>
+        <p className="text-sm text-slate-500">予定を管理</p>
       </header>
 
       <div className="flex flex-col gap-4">
@@ -101,11 +101,11 @@ export default function Home() {
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
-              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <p className="text-sm text-slate-600">タスクはローカルストレージに自動保存されます。</p>
+            <p className="text-sm text-slate-500">データはローカルストレージに保存されます。ブラウザのデータを削除するとタスクがリセットされます。</p>
           </div>
         </div>
 
@@ -164,6 +164,7 @@ export default function Home() {
                     ${isToday(date) && !isSelected(date) ? "ring-2 ring-blue-500 ring-inset" : ""}
                     ${dayOfWeek === 0 && !isSelected(date) ? "text-red-500" : ""}
                     ${dayOfWeek === 6 && !isSelected(date) ? "text-blue-500" : ""}
+                    ${!isSelected(date) && dayOfWeek !== 0 && dayOfWeek !== 6 ? "text-slate-600" : ""}
                   `}
                 >
                   <span>{date.getDate()}</span>
@@ -185,7 +186,7 @@ export default function Home() {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
-                {isToday(selectedDate) ? "今日のタスク" : formatDate(selectedDate)}
+                {isToday(selectedDate) ? "今日" : formatDate(selectedDate)}のタスク
               </h2>
               {totalCount > 0 && (
                 <p className="text-sm text-slate-500 mt-0.5">
