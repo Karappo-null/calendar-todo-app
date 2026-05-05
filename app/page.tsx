@@ -23,8 +23,6 @@ export default function Home() {
   const [selectedDate, setSelectedDate] = useState(localToday)
   const [currentMonth, setCurrentMonth] = useState(localToday)
 
-  //const [selectedDate, setSelectedDate] = useState(new Date())
-  //const [currentMonth, setCurrentMonth] = useState(new Date())
   const [todos, setTodos] = useState<Todo[]>([])
   const [newTodo, setNewTodo] = useState("")
 
@@ -39,7 +37,12 @@ export default function Home() {
     localStorage.setItem("planly-todos", JSON.stringify(todos))
   }, [todos])
 
-  const getDateKey = (date: Date) => date.toISOString().split("T")[0]
+  const getDateKey = (date: Date) => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, "0")
+    const day = String(date.getDate()).padStart(2, "0")
+    return `${year}-${month}-${day}`
+  }
 
   const getDaysInMonth = (date: Date) => {
     const year = date.getFullYear()
