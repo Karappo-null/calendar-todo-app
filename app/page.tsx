@@ -81,8 +81,13 @@ export default function Home() {
     setTodos((prev) => prev.filter((todo) => todo.id !== id))
   }
 
-  const isToday = (date: Date) => date.toDateString() === new Date().toDateString()
-  const isSelected = (date: Date) => date.toDateString() === selectedDate.toDateString()
+  const isSameDate = (a: Date, b: Date) =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate()
+
+  const isToday = (date: Date) => isSameDate(date, localToday)
+  const isSelected = (date: Date) => isSameDate(date, selectedDate)
 
   const todoCountByDate = todos.reduce<Record<string, number>>((acc, todo) => {
     if (!todo.completed) acc[todo.date] = (acc[todo.date] || 0) + 1
